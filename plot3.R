@@ -25,14 +25,18 @@ if (file.exists("data\\household_power_consumption_truncated.txt")) {
 ### LET'S ROCK ###
 
 # drawing to a file
-png(filename="plot2.png", bg = "transparent")
+png(filename="plot3.png", bg = "transparent")
 
-# get column we need
-global_active_power = as.numeric(as.character(data$Global_active_power))
-n = length(global_active_power)
+
+n = length(data$Sub_metering_1)
 
 # draw a plot
-plot(global_active_power, type="l",  xlab = " ", ylab="Global Active Power (kilowatts)", xaxt="n")
+plot(data$Sub_metering_1, type="n",  xlab = " ", ylab="Energy sub metering", xaxt="n")
+lines(data$Sub_metering_1)
+lines(data$Sub_metering_2, col="red")
+lines(data$Sub_metering_3, col="blue")
+legend("topright", lty = 1, col = c("black", "blue", "red"), 
+       legend = c("Sub_metering_1", "Sub_metering_2", "Sub_metering_3"))
 
 axis(1, at=c(1, n / 2, n-1), lab=c("Thu", "Fri", "Sat"))
 # save
